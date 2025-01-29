@@ -33,5 +33,6 @@ export function activate(context: vscode.ExtensionContext): void {
     disposeStatus.dispose();
   });
 
-  vscode.workspace.onDidSaveTextDocument(debounce(500, onSave));
+  vscode.workspace.onDidSaveTextDocument(debounce(250, onSave));
 }
+
