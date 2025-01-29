@@ -1,0 +1,89 @@
+{
+  "name": "cmdOnSave",
+  "displayName": "Cmd On Save",
+  "description": "Run vscode or shell commands when files are saved",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.cmdOnSave.enable",
+        "title": "CmdOnSave: Enable"
+      },
+      {
+        "command": "extension.cmdOnSave.disable",
+        "title": "CmdOnSave: Disable"
+      }
+    ],
+    "configuration": {
+      "title": "CmdOnSave Configuration",
+      "type": "object",
+      "properties": {
+        "cmdOnSave": {
+          "type": "object",
+          "properties": {
+            "commands": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "match": {
+                    "type": "string",
+                    "description": "Regex for matching files to run commands on.",
+                    "default": ".*"
+                  },
+                  "notMatch": {
+                    "type": "string",
+                    "description": "Regex for matching files *not* to run commands on.",
+                    "default": ".*"
+                  },
+                  "cmd": {
+                    "type": "string",
+                    "description": "Command to execute on save.",
+                    "default": "echo ${file}"
+                  },
+                  "isAsync": {
+                    "type": "boolean",
+                    "description": "Run command asynchronously.",
+                    "default": false
+                  },
+                  "isShellCommand": {
+                    "type": "boolean",
+                    "description": "Run command in terminal.",
+                    "default": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.96.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "eslint": "^9.16.0",
+    "typescript": "^5.7.2",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}
