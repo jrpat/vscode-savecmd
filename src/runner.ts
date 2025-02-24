@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { exec } from "child_process";
+import { slug, title } from "./name";
 import * as path from "path";
 var ncp = require("copy-paste");
 var endOfLine = require("os").EOL;
@@ -25,10 +26,8 @@ export default class Runner {
 
   constructor(context: vscode.ExtensionContext) {
     this.context = context;
-    this.outputChannel = vscode.window.createOutputChannel("cmdOnSave");
-    this.config = vscode.workspace.getConfiguration(
-      "cmdOnSave"
-    ) as unknown as IConfig;
+    this.outputChannel = vscode.window.createOutputChannel(title);
+    this.config = vscode.workspace.getConfiguration(slug) as unknown as IConfig;
   }
 
   private runInTerminal(command: string) {
@@ -77,20 +76,17 @@ export default class Runner {
   }
 
   public loadConfig(): void {
-    this.config = vscode.workspace.getConfiguration(
-      "cmdOnSave"
-    ) as unknown as IConfig;
+    this.config = vscode.workspace.getConfiguration(slug) as unknown as IConfig;
   }
 
-  public showOutputMessage(message?: string): void {
-    message =
-      message || `CmdOnSave ${this.isEnabled ? "enabled" : "disabled"}.`;
-    this.outputChannel.appendLine(message);
+  public showOutputMessage(msg?: string): void {
+    msg = msg || `${title}: ${this.isEnabled ? "enabled" : "disabled"}.`;
+    this.outputChannel.appendLine(msg);
   }
 
-  public showStatusMessage(message: string): vscode.Disposable {
-    this.showOutputMessage(message);
-    return vscode.window.setStatusBarMessage(message);
+  public showStatusMessage(msg: string): vscode.Disposable {
+    this.showOutputMessage(msg);
+    return vscode.window.setStatusBarMessage(msg);
   }
 
   public runCommands(document: vscode.TextDocument): void {
@@ -174,7 +170,6 @@ export default class Runner {
       });
     }
 
-    //this._runCommands(commands);
     this.runAll(commands);
   }
 }

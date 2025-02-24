@@ -1,6 +1,6 @@
 {
-  "name": "cmdOnSave",
-  "displayName": "Cmd On Save",
+  "name": "save-commander",
+  "displayName": "Save Commander",
   "description": "Run vscode or shell commands when files are saved",
   "version": "0.0.1",
   "repository": "https://github.com/jrpat/vscode-cmd-on-save",
@@ -17,19 +17,23 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.cmdOnSave.enable",
-        "title": "CmdOnSave: Enable"
+        "command": "extension.save-commander.toggle",
+        "title": "Save Commander: Toggle"
       },
       {
-        "command": "extension.cmdOnSave.disable",
-        "title": "CmdOnSave: Disable"
+        "command": "extension.save-commander.enable",
+        "title": "Save Commander: Enable"
+      },
+      {
+        "command": "extension.save-commander.disable",
+        "title": "Save Commander: Disable"
       }
     ],
     "configuration": {
-      "title": "CmdOnSave Configuration",
+      "title": "Save Commander Settings",
       "type": "object",
       "properties": {
-        "cmdOnSave": {
+        "save-commander": {
           "type": "object",
           "properties": {
             "commands": {

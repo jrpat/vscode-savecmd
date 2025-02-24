@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { slug, title } from "./name";
 import Runner from "./runner";
 
 function debounce<T extends (...args: any[]) => void>(delay: number, fn: T) {
@@ -10,29 +11,31 @@ function debounce<T extends (...args: any[]) => void>(delay: number, fn: T) {
 }
 
 export function activate(context: vscode.ExtensionContext): void {
-  var extension = new Runner(context);
-  extension.showOutputMessage();
+  var ext = new Runner(context);
+  ext.showOutputMessage();
 
   const onSave = (document: vscode.TextDocument) => {
-    extension.runCommands(document);
+    ext.runCommands(document);
   };
 
-  vscode.commands.registerCommand("extension.cmdOnSave.enable", () => {
-    extension.isEnabled = true;
+  vscode.commands.registerCommand(`extension.${slug}.toggle`, () => {
+    ext.isEnabled = !ext.isEnabled;
+    vscode.window.showInformationMessage(`${title} enabled: ${ext.isEnabled}`);
   });
 
-  vscode.commands.registerCommand("extension.cmdOnSave.disable", () => {
-    extension.isEnabled = false;
+  vscode.commands.registerCommand(`extension.${slug}.enable`, () => {
+    ext.isEnabled = true;
+  });
+
+  vscode.commands.registerCommand(`extension.${slug}.disable`, () => {
+    ext.isEnabled = false;
   });
 
   vscode.workspace.onDidChangeConfiguration(() => {
-    let disposeStatus = extension.showStatusMessage(
-      "CmdOnSave: Reloading config."
-    );
-    extension.loadConfig();
-    disposeStatus.dispose();
+    let msg = ext.showStatusMessage(`${title}: reloading config`);
+    ext.loadConfig();
+    msg.dispose();
   });
 
   vscode.workspace.onDidSaveTextDocument(debounce(250, onSave));
 }
-
