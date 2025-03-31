@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import { slug, title } from "./name";
 import Runner from "./runner";
 
 function debounce<T extends (...args: any[]) => void>(delay: number, fn: T) {
@@ -18,21 +17,28 @@ export function activate(context: vscode.ExtensionContext): void {
     ext.runCommands(document);
   };
 
-  vscode.commands.registerCommand(`extension.${slug}.toggle`, () => {
+  const inform = () => {
+    const status = ext.isEnabled ? 'Enabled' : 'Disabled'
+    vscode.window.showInformationMessage(`SaveCmd: ${status}`);
+  }
+
+  vscode.commands.registerCommand(`extension.savecmd.toggle`, () => {
     ext.isEnabled = !ext.isEnabled;
-    vscode.window.showInformationMessage(`${title} enabled: ${ext.isEnabled}`);
+    inform();
   });
 
-  vscode.commands.registerCommand(`extension.${slug}.enable`, () => {
+  vscode.commands.registerCommand(`extension.savecmd.enable`, () => {
     ext.isEnabled = true;
+    inform();
   });
 
-  vscode.commands.registerCommand(`extension.${slug}.disable`, () => {
+  vscode.commands.registerCommand(`extension.savecmd.disable`, () => {
     ext.isEnabled = false;
+    inform();
   });
 
   vscode.workspace.onDidChangeConfiguration(() => {
-    let msg = ext.showStatusMessage(`${title}: reloading config`);
+    let msg = ext.showStatusMessage(`SaveCmd: Reloading Config`);
     ext.loadConfig();
     msg.dispose();
   });

@@ -1,9 +1,10 @@
 {
-  "name": "save-commander",
-  "displayName": "Save Commander",
+  "name": "savecmd",
+  "displayName": "SaveCmd",
+  "icon": "savecmd.png",
   "description": "Run vscode or shell commands when files are saved",
-  "version": "0.0.1",
-  "repository": "https://github.com/jrpat/vscode-cmd-on-save",
+  "version": "1.0.0",
+  "repository": "https://github.com/jrpat/vscode-savecmd",
   "engines": {
     "vscode": "^1.96.0"
   },
@@ -17,23 +18,23 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.save-commander.toggle",
-        "title": "Save Commander: Toggle"
+        "command": "extension.savecmd.toggle",
+        "title": "SaveCmd: Toggle"
       },
       {
-        "command": "extension.save-commander.enable",
-        "title": "Save Commander: Enable"
+        "command": "extension.savecmd.enable",
+        "title": "SaveCmd: Enable"
       },
       {
-        "command": "extension.save-commander.disable",
-        "title": "Save Commander: Disable"
+        "command": "extension.savecmd.disable",
+        "title": "SaveCmd: Disable"
       }
     ],
     "configuration": {
-      "title": "Save Commander Settings",
+      "title": "SaveCmd Settings",
       "type": "object",
       "properties": {
-        "save-commander": {
+        "savecmd": {
           "type": "object",
           "properties": {
             "commands": {
@@ -43,27 +44,27 @@
                 "properties": {
                   "match": {
                     "type": "string",
-                    "description": "Regex for matching files to run commands on.",
+                    "description": "Regex for matching files to run commands on",
                     "default": ".*"
                   },
                   "notMatch": {
                     "type": "string",
-                    "description": "Regex for matching files *not* to run commands on.",
+                    "description": "Regex for matching files *not* to run commands on",
                     "default": ".*"
                   },
                   "cmd": {
                     "type": "string",
-                    "description": "Command to execute on save.",
+                    "description": "Command to execute on save",
                     "default": "echo ${file}"
                   },
                   "isAsync": {
                     "type": "boolean",
-                    "description": "Run command asynchronously.",
+                    "description": "Run command asynchronously",
                     "default": false
                   },
                   "isShellCommand": {
                     "type": "boolean",
-                    "description": "Run command in terminal.",
+                    "description": "Run command in terminal",
                     "default": true
                   }
                 }
@@ -83,14 +84,8 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
     "@types/vscode": "^1.96.0",
-    "@typescript-eslint/eslint-plugin": "^8.17.0",
-    "@typescript-eslint/parser": "^8.17.0",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1",
-    "eslint": "^9.16.0",
     "typescript": "^5.7.2"
   },
   "dependencies": {

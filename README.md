@@ -1,11 +1,8 @@
-# Run VSCode or shell command when files are saved
+# SaveCmd
 
-Fork from [vscode-save-and-run](https://github.com/wk-j/vscode-save-and-run)
+Run VSCode or shell commands when files matching a pattern are saved.
 
-Extends the original extension to execute VS Code extension commands or terminal-commands 
-
-Extends the fork to debounce command running so that simultaneous
-matching file saves only run the command once.
+Debounces so that simultaneous saved files only run the command once.
 
 ![](https://github.com/wk-j/vscode-save-and-run/raw/master/images/save-and-run.png)
 
@@ -53,8 +50,9 @@ Add "saveAndRunExt" configuration to user or workspace settings.
 
 The following commands are exposed in the command palette
 
-- `Save and Run Ext : Enable`
-- `Save and Run Ext : Disable`
+- `SaveCmd: Enable`
+- `SaveCmd: Disable`
+- `SaveCmd: Toggle`
 
 ## Placeholder Tokens
 
@@ -75,4 +73,4 @@ Commands support placeholders similar to tasks.json.
 
 ## License
 
-[Apache](https://github.com/wk-j/vscode-save-and-run/blob/master/LICENSE)
+MIT

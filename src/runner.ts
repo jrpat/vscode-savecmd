@@ -1,6 +1,4 @@
 import * as vscode from "vscode";
-import { exec } from "child_process";
-import { slug, title } from "./name";
 import * as path from "path";
 var ncp = require("copy-paste");
 var endOfLine = require("os").EOL;
@@ -26,8 +24,8 @@ export default class Runner {
 
   constructor(context: vscode.ExtensionContext) {
     this.context = context;
-    this.outputChannel = vscode.window.createOutputChannel(title);
-    this.config = vscode.workspace.getConfiguration(slug) as unknown as IConfig;
+    this.outputChannel = vscode.window.createOutputChannel("SaveCmd");
+    this.config = vscode.workspace.getConfiguration("savecmd") as unknown as IConfig;
   }
 
   private runInTerminal(command: string) {
@@ -76,11 +74,11 @@ export default class Runner {
   }
 
   public loadConfig(): void {
-    this.config = vscode.workspace.getConfiguration(slug) as unknown as IConfig;
+    this.config = vscode.workspace.getConfiguration("savecmd") as unknown as IConfig;
   }
 
   public showOutputMessage(msg?: string): void {
-    msg = msg || `${title}: ${this.isEnabled ? "enabled" : "disabled"}.`;
+    msg = msg || `SaveCmd: ${this.isEnabled ? "enabled" : "disabled"}.`;
     this.outputChannel.appendLine(msg);
   }
 
@@ -122,7 +120,8 @@ export default class Runner {
       return;
     }
 
-    this.showStatusMessage("Running on save commands...");
+    const msg = this.showStatusMessage("SaveCmd: Running...");
+    setTimeout(() => msg.dispose(), 1000);
 
     // build our commands by replacing parameters with values
     var commands: Array<ICommand> = [];
