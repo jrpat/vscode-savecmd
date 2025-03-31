@@ -4,7 +4,7 @@
   "publisher": "jrpat",
   "icon": "savecmd.png",
   "description": "Run vscode or shell commands when files are saved",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "https://github.com/jrpat/vscode-savecmd",
   "engines": {
     "vscode": "^1.96.0"
