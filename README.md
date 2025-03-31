@@ -22,7 +22,7 @@ Debounces so that simultaneous saved files only run the command once.
 
 ## Configuration
 
-Add "saveAndRunExt" configuration to user or workspace settings.
+Add "savecmd" configuration to user or workspace settings.
 
 - "commands" - array of commands that will be run whenever a file is saved.
   - "match" - a regex for matching which files to run commands on
@@ -31,7 +31,7 @@ Add "saveAndRunExt" configuration to user or workspace settings.
 ## Sample Config
 
 ```json
-"saveAndRunExt": {
+"savecmd": {
 	"commands": [
 		{
 			"match": ".*",
