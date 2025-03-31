@@ -1,6 +1,7 @@
 {
   "name": "savecmd",
   "displayName": "SaveCmd",
+  "publisher": "jrpat",
   "icon": "savecmd.png",
   "description": "Run vscode or shell commands when files are saved",
   "version": "1.0.0",
